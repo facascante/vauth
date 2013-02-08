@@ -5,6 +5,7 @@
 
 var express = require('express')
   , pser = require('./routes/autoload')
+  , pser = require('./routes/api')
   , http = require('http')
   , path = require('path');
 
@@ -24,7 +25,9 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({showStack: true, dumpExceptions: true}));
+app.use(express.errorHandler({showStack: true, dumpExceptions: true}));
+app.use(express.errorHandler());
+
 });
 
 app.all('/api/:version/users/verify', pser.verify);
