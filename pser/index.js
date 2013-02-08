@@ -5,7 +5,6 @@
 
 var express = require('express')
   , pser = require('./routes/autoload')
-  , pser = require('./routes/api')
   , http = require('http')
   , path = require('path');
 
