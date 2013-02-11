@@ -1,4 +1,6 @@
-module.exports = {
+
+
+var config = module.exports = {
 		
   AUTH_URL : "dev-api.accounts.smartnet.ph",
   AUTHWEB_URL : "dev-accounts.smartnet.ph",
@@ -11,4 +13,11 @@ module.exports = {
   getPublicKey : function(pk_id){
 	  return "/opt/local/share/keys/"+pk_id+".pem";
   }
+};
+
+
+module.exports.global = function(req,res,next){
+
+	req.global = config;
+	return next();
 };

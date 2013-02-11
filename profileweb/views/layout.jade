@@ -1,0 +1,33 @@
+doctype 5
+html
+  head
+    meta(charset='utf-8')
+    meta(name='HandheldFriendly', content='True')
+    meta(name='MobileOptimized', content='320')
+    meta(name='viewport', content='width=device-width,initial-scale=0.1, user-scalable=no')
+    meta(http-equiv='cleartype', content='on')
+    meta(http-equiv='content-type', content='text/html; charset=utf-8')
+    meta(http-equiv='cache-control', content='no-cache')
+    meta(http-equiv='expires', content='3600')
+    meta(name='revisit-after', content='1 day')
+    meta(name='robots', content='index, follow')
+    meta(name='publisher', content='Smartnet')
+    meta(name='copyright', content='All logos and images are copyrighted by their respected owners, no information or data can be copied without written consent by the owner')
+    meta(name='author', content='Developer: F.Cascante, Design: E.Gagolinan')
+    meta(name='distribution, content='global')
+    include stylesheets/styles.css
+    title= title
+  body
+    .container
+      .module-container
+        .module-container-transparent
+          .header
+            .logo
+            a(href=accounts_url)
+              .sign-in-but Sign In
+          .body-container
+            block content
+          .footer
+            p
+              &#169; 2014 SmartNet | 
+              a(href='/dialogs/help') Help

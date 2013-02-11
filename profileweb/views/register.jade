@@ -1,0 +1,149 @@
+extends layout
+
+block content
+
+  case page_no
+    when 1
+      .subheader Create a new SmartNet Account
+      .tabs-container
+        ol
+         li.tab-01.t1-selected Account Details
+         li.tab-02 Security Questions
+         li.tab-03 Verification
+      .mod-bod-content
+        form(method='post')
+          -if(errors.first_name){
+          p.txt-error=errors.first_name.msg
+          -}else if(errors.last_name){
+          p.txt-error=errors.last_name.msg
+          -}else{
+          p Name
+          -}
+          -if(errors.first_name){
+          input.name-box(type='text', name='first_name', style='margin-right:10px;', placeholder='First', value=info.first_name, class='input-error')
+          -}else{
+          input.name-box(type='text', name='first_name', style='margin-right:10px;', placeholder='First', value=info.first_name)
+          -}
+          -if(errors.last_name){
+          input.name-box(type='text', name='last_name', placeholder='Last', value=info.last_name, class='input-error')
+          -}else{
+          input.name-box(type='text', name='last_name', placeholder='Last', value=info.last_name)
+          -}
+          .breaker
+          -if(errors.username){
+          p.txt-error=errors.username.msg
+          input(type='text', name='username', value=info.username, class='input-error')
+          -}else{
+          p Username
+          input(type='text', name='username', value=info.username)
+          -}
+          .breaker
+          -if(errors.password){
+          p.txt-error=errors.password.msg
+          input(type='password', name='password', class='input-error')
+          -}else{
+          p Password
+          input(type='password', name='password')
+          -}
+          .breaker
+          -if(errors.repassword){
+          p.txt-error=errors.repassword.msg
+          input(type='password', name='repassword', class='input-error')
+          -}else{
+          p Confirm Password
+          input(type='password', name='repassword')
+          -}
+          .breaker
+          .bottom-button
+            button.next-button(type='submit',name='btnnav', value=2) Next
+    when 2
+      .subheader Create a new SmartNet Account
+      .tabs-container
+        ol
+         li.tab-01 Account Details
+         li.tab-02.t2-selected Security Questions
+         li.tab-03 Verification
+      .mod-bod-content
+        form(method='post')
+          p Please add a security question. It will help us in case you lose your password.
+          .breaker
+          -if(errors.sec_q){
+          p.txt-error=errors.sec_q.msg
+          -}else{
+          p Security Question
+          -}
+          select.styled-select(name='sec_q', value=info.sec_q)
+            option(value='Pet name?')='Pet name'
+            option(value='School name?')='School name'
+          .breaker
+          -if(errors.sec_a){
+          p.txt-error=errors.sec_a.msg
+          input(type='text', name='sec_a', value=info.sec_a, class='input-error')
+          -}else{
+          p Answer to Security Question
+          input(type='text', name='sec_a', value=info.sec_a)
+          -}
+          .breaker
+          .bottom-button
+            p
+              button.prev-button(type='submit', name='btnnav', value=1) Previous
+              button.next-button(type='submit', name='btnnav', value=3) Next
+    when 3
+      .subheader Create a new SmartNet Account
+      .tabs-container
+        ol
+         li.tab-01 Account Details
+         li.tab-02 Security Questions
+         li.tab-03.t3-selected Verification
+      .mod-bod-content
+        form(method='post')
+          p Enter your e-mail address and/or mobile number to verify your account.
+          .breaker
+          -if(errors.email){
+          p.txt-error=errors.email.msg
+          input(type='text', name='email', value=info.email, class='input-error')
+          -}else{
+          p E-mail Address 
+          input(type='text', name='email', value=info.email)
+          -}
+          p.sub-text or
+          -if(errors.mobile_number){
+          p.txt-error=errors.mobile_number.msg
+          input(type='text', name='mobile_number', value=info.mobile_number, class='input-error')
+          -}else{
+          p Mobile Number
+          input(type='text', name='mobile_number', value=info.mobile_number)
+          -}
+          p.sub-text 11 characters remaining
+          .breaker
+          .cb-tandc
+            -if(errors.tcagree){
+            p.txt-error=errors.tcagree.msg
+            input.cb-styled(type='checkbox', name='tcagree', value=info.tcagree, class='input-error')
+            -}else{
+            input.cb-styled(type='checkbox', name='tcagree', value=info.tcagree)
+            -}
+            p I agree to the
+              a(href='') Terms and Conditions
+          .breaker
+          .bottom-button
+            p
+              button.prev-button(type='submit', name='btnnav', value=-2)='Previous'
+              button.cma-button(type='submit', name='btnnav', value=4)='Create My Account'
+    when 4
+      .mod-bod-content
+        -if(info.email){
+        p An email has been sent to
+          span= info.email
+        p Please click on the verification link which can be found in the email to continue with your registration.
+        -} else{
+        p A message has been sent to
+          span= info.mobile_number
+        p Click 
+          a(href='/dialogs/verify') here to verify your account.
+        -}
+        br
+        br
+        p Didn't get the message we sent?
+        p Please check your Spam folder or
+        a(href='/dialogs/activate') Send a new Verification Message

@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+  case page_no
+    when 1
+      .subheader Send New Verification Message
+      .mod-bod-content
+        form(method='post')
+          .breaker
+          .breaker
+          -if(errors.identity){
+          p.txt-error=errors.identity.msg
+          input(type='text', name='identity',value=info.identity, class='input-error');
+          -} else {
+          p Username / Mobile No. / E-mail Add
+          input(type='text', name='identity',value=info.identity);
+          -}
+          .breaker
+          button.cma-button(type='submit', name='btnnav', value=2)='Send'

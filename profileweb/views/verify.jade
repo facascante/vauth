@@ -1,0 +1,52 @@
+extends layout
+
+block content
+
+  case page_no
+    when 1
+      .subheader Confirm SmartNet Account
+      .mod-bod-content
+        form(method='post')
+          -if(info.channel == 'email'){
+          p Click confirm to activate your account.
+          -if(errors.identity){
+          p.txt-error=errors.identity.msg||errors.identity.msg
+          input(type='hidden', name='identity', value=info.identity, placeholder='Enter Mobile No', class='input-error')
+          -}else{
+          input(type='hidden', name='identity', value=info.identity, placeholder='Enter Mobile No')
+          -}
+          input(type='hidden', name='channel', value=info.channel);
+          .breaker
+          -if(errors.key){
+          input(type='hidden', name='key', value=info.key, placeholder='Enter activation key', class='input-error');
+          -}else{
+          input(type='hidden', name='key', value=info.key, placeholder='Enter activation key');
+          -}
+          -}else { 
+          p To confirm using mobile phone, enter the 4 digit activation key found on the message we sent to your mobile phone number.
+          -if(errors.identity){
+          p.txt-error=errors.identity.msg
+          input(type='text', name='identity', value=info.identity, placeholder='Enter Mobile No', class='input-error')
+          -}else{
+          p Mobile No.
+          input(type='text', name='identity', value=info.identity, placeholder='Enter Mobile No')
+          -}
+          input(type='hidden', name='channel', value=info.channel);
+          .breaker
+          -if(errors.key){
+          p.txt-error=errors.key.msg
+          input(type='text', name='key', value=info.key, placeholder='Enter activation key', class='input-error');
+          -}else{
+          p Activation Key
+          input(type='text', name='key', value=info.key, placeholder='Enter activation key');
+          -}
+          -}
+          .breaker
+          button.cma-button(type='submit', name='btnnav', value=2)='Confirm Account'
+    when 2
+     .subheader Confirm SmartNet Account
+     .mod-bod-content
+       .breaker
+       .breaker
+       p Your account is now active.,
+         a(href=accounts_url) Click here to login.
